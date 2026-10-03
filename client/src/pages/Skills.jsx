@@ -1,112 +1,92 @@
+import { useEffect, useState } from "react";
+
 function Skills() {
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const fetchSkills = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch("http://localhost:5000/api/skills", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch skills");
+      }
+
+      setSkills(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSkills();
+  }, []);
+
+  if (loading) {
+    return <p>Loading skills...</p>;
+  }
+
   return (
-    <div className="simple-page">
+    <div className="skills">
       <div className="page-heading">
         <div>
-          <h2>Skills</h2>
+          <h2>My Skills</h2>
           <p>Track and manage your technical skills.</p>
         </div>
 
-        <button className="primary-btn">
-          + Add Skill
-        </button>
+        <button className="primary-btn">+ Add Skill</button>
       </div>
 
-      <div className="skills-grid">
+      {error && <p>{error}</p>}
 
-        <div className="skill-card">
-          <div className="skill-card-top">
-            <div className="skill-symbol">☕</div>
-
-            <div>
-              <h3>Java</h3>
-              <span>Programming Language</span>
-            </div>
-          </div>
-
-          <div className="skill-level">
-            <span>Advanced</span>
-            <strong>80%</strong>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: "80%" }}
-            ></div>
-          </div>
+      {skills.length === 0 ? (
+        <div className="dashboard-card">
+          <p>No skills added yet.</p>
         </div>
+      ) : (
+        <div className="skills-grid">
+          {skills.map((skill) => (
+            <div className="skill-card" key={skill._id}>
+              <div className="skill-card-top">
+                <div className="skill-symbol">
+                  {skill.name.charAt(0).toUpperCase()}
+                </div>
 
-        <div className="skill-card">
-          <div className="skill-card-top">
-            <div className="skill-symbol">JS</div>
+                <span className="skill-level">
+                  {skill.level}
+                </span>
+              </div>
 
-            <div>
-              <h3>JavaScript</h3>
-              <span>Programming Language</span>
+              <h3>{skill.name}</h3>
+
+              <p>{skill.category}</p>
+
+              <div className="progress-info">
+                <span>Progress</span>
+                <strong>{skill.progress}%</strong>
+              </div>
+
+              <div className="progress-bar">
+                <div
+                  className="progress-fill"
+                  style={{ width: `${skill.progress}%` }}
+                ></div>
+              </div>
             </div>
-          </div>
-
-          <div className="skill-level">
-            <span>Intermediate</span>
-            <strong>70%</strong>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: "70%" }}
-            ></div>
-          </div>
+          ))}
         </div>
-
-        <div className="skill-card">
-          <div className="skill-card-top">
-            <div className="skill-symbol">⚛</div>
-
-            <div>
-              <h3>React</h3>
-              <span>Frontend</span>
-            </div>
-          </div>
-
-          <div className="skill-level">
-            <span>Intermediate</span>
-            <strong>65%</strong>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: "65%" }}
-            ></div>
-          </div>
-        </div>
-
-        <div className="skill-card">
-          <div className="skill-card-top">
-            <div className="skill-symbol">SQL</div>
-
-            <div>
-              <h3>SQL</h3>
-              <span>Database</span>
-            </div>
-          </div>
-
-          <div className="skill-level">
-            <span>Advanced</span>
-            <strong>75%</strong>
-          </div>
-
-          <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: "75%" }}
-            ></div>
-          </div>
-        </div>
-
-      </div>
+      )}
     </div>
   );
 }

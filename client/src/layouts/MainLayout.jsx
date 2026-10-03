@@ -1,11 +1,23 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 function MainLayout() {
+  const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    navigate("/login");
+  };
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <div className="logo">
           <div className="logo-icon">S</div>
+
           <div>
             <h2>SkillSphere</h2>
             <span>Student Portfolio</span>
@@ -39,7 +51,7 @@ function MainLayout() {
         </nav>
 
         <div className="sidebar-bottom">
-          <button className="logout-btn">
+          <button className="logout-btn" onClick={handleLogout}>
             🚪 Logout
           </button>
         </div>
@@ -53,10 +65,15 @@ function MainLayout() {
           </div>
 
           <div className="user-mini">
-            <div className="avatar">S</div>
+            <div className="avatar">
+              {user.name ? user.name.charAt(0).toUpperCase() : "S"}
+            </div>
+
             <div>
-              <strong>Student</strong>
-              <span>Computer Science</span>
+              <strong>{user.name || "Student"}</strong>
+              <span>
+                {user.role === "admin" ? "Administrator" : "Computer Science"}
+              </span>
             </div>
           </div>
         </header>

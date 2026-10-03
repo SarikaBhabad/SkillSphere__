@@ -3,8 +3,11 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
+
 const authRoutes = require("./routes/authRoutes");
 const skillRoutes = require("./routes/skillRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const achievementRoutes = require("./routes/achievementRoutes");
 
 dotenv.config();
 
@@ -26,6 +29,12 @@ app.use("/api/auth", authRoutes);
 
 // Skills
 app.use("/api/skills", skillRoutes);
+
+// Projects
+app.use("/api/projects", projectRoutes);
+
+// Achievements
+app.use("/api/achievements", achievementRoutes);
 
 const PORT = process.env.PORT || 5000;
 
