@@ -5,6 +5,8 @@ function MainLayout() {
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
+  const isAdmin = user.role === "admin";
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -14,74 +16,122 @@ function MainLayout() {
 
   return (
     <div className="app-shell">
+
+      {/* Sidebar */}
       <aside className="sidebar">
+
         <div className="logo">
           <div className="logo-icon">S</div>
 
           <div>
             <h2>SkillSphere</h2>
-            <span>Student Portfolio</span>
+            <span>
+              {isAdmin
+                ? "Admin Panel"
+                : "Student Portfolio"}
+            </span>
           </div>
         </div>
 
         <nav className="sidebar-nav">
-          <NavLink to="/" end>
-            🏠 Dashboard
-          </NavLink>
 
-          <NavLink to="/skills">
-            🎯 Skills
-          </NavLink>
+          {/* Admin Navigation */}
+          {isAdmin ? (
+            <NavLink to="/admin">
+              🛡️ Admin Dashboard
+            </NavLink>
+          ) : (
+            <>
+              <NavLink to="/" end>
+                🏠 Dashboard
+              </NavLink>
 
-          <NavLink to="/projects">
-            💻 Projects
-          </NavLink>
+              <NavLink to="/skills">
+                🎯 Skills
+              </NavLink>
 
-          <NavLink to="/achievements">
-            🏆 Achievements
-          </NavLink>
+              <NavLink to="/projects">
+                💻 Projects
+              </NavLink>
 
-          <NavLink to="/roadmap">
-            🗺️ Roadmap
-          </NavLink>
+              <NavLink to="/achievements">
+                🏆 Achievements
+              </NavLink>
 
-          <NavLink to="/profile">
-            👤 Profile
-          </NavLink>
+              <NavLink to="/roadmap">
+                🗺️ Roadmap
+              </NavLink>
+
+              <NavLink to="/profile">
+                👤 Profile
+              </NavLink>
+            </>
+          )}
+
         </nav>
 
         <div className="sidebar-bottom">
-          <button className="logout-btn" onClick={handleLogout}>
+
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+          >
             🚪 Logout
           </button>
+
         </div>
+
       </aside>
 
+      {/* Main Content */}
       <main className="main-content">
+
         <header className="topbar">
+
           <div>
-            <h1>Welcome to SkillSphere</h1>
-            <p>Track your skills, projects and achievements.</p>
+            <h1>
+              {isAdmin
+                ? "Welcome, Admin"
+                : "Welcome to SkillSphere"}
+            </h1>
+
+            <p>
+              {isAdmin
+                ? "Manage students and monitor the platform."
+                : "Track your skills, projects and achievements."}
+            </p>
           </div>
 
           <div className="user-mini">
+
             <div className="avatar">
-              {user.name ? user.name.charAt(0).toUpperCase() : "S"}
+              {user.name
+                ? user.name.charAt(0).toUpperCase()
+                : "S"}
             </div>
 
             <div>
-              <strong>{user.name || "Student"}</strong>
+              <strong>
+                {user.name || "Student"}
+              </strong>
+
               <span>
-                {user.role === "admin" ? "Administrator" : "Computer Science"}
+                {isAdmin
+                  ? "Administrator"
+                  : "Computer Science"}
               </span>
             </div>
+
           </div>
+
         </header>
 
         <section className="page-content">
           <Outlet />
         </section>
+
       </main>
+
     </div>
   );
 }

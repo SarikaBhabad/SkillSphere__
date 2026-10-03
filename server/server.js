@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const skillRoutes = require("./routes/skillRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const achievementRoutes = require("./routes/achievementRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use("/api/projects", projectRoutes);
 
 // Achievements
 app.use("/api/achievements", achievementRoutes);
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 

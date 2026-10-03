@@ -1,7 +1,94 @@
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 function Dashboard() {
+  const navigate = useNavigate();
+  const [skills, setSkills] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [achievements, setAchievements] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const fetchDashboardData = async () => {
+    try {
+      setError("");
+
+      const token = localStorage.getItem("token");
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      const [skillsResponse, projectsResponse, achievementsResponse] =
+        await Promise.all([
+          fetch("http://localhost:5000/api/skills", {
+            headers,
+          }),
+
+          fetch("http://localhost:5000/api/projects", {
+            headers,
+          }),
+
+          fetch("http://localhost:5000/api/achievements", {
+            headers,
+          }),
+        ]);
+
+      const skillsData = await skillsResponse.json();
+      const projectsData = await projectsResponse.json();
+      const achievementsData = await achievementsResponse.json();
+
+      if (!skillsResponse.ok) {
+        throw new Error(
+          skillsData.message || "Failed to fetch skills"
+        );
+      }
+
+      if (!projectsResponse.ok) {
+        throw new Error(
+          projectsData.message || "Failed to fetch projects"
+        );
+      }
+
+      if (!achievementsResponse.ok) {
+        throw new Error(
+          achievementsData.message ||
+            "Failed to fetch achievements"
+        );
+      }
+
+      setSkills(skillsData);
+      setProjects(projectsData);
+      setAchievements(achievementsData);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const overallProgress =
+    skills.length > 0
+      ? Math.round(
+          skills.reduce(
+            (total, skill) => total + (skill.progress || 0),
+            0
+          ) / skills.length
+        )
+      : 0;
+
+  if (loading) {
+    return <p>Loading dashboard...</p>;
+  }
+
   return (
     <div className="dashboard">
-
       {/* Page Heading */}
       <div className="page-heading">
         <div>
@@ -9,46 +96,53 @@ function Dashboard() {
           <p>Here's an overview of your learning journey.</p>
         </div>
 
-        <button className="primary-btn">
-          + Add Skill
-        </button>
+        <button
+  className="primary-btn"
+  onClick={() => navigate("/skills")}
+>
+  + Add Skill
+</button>
       </div>
+
+      {error && <p className="auth-error">{error}</p>}
 
       {/* Stats */}
       <div className="stats-grid">
-
         <div className="stat-card">
           <div className="stat-icon">🎯</div>
+
           <div>
             <span>Total Skills</span>
-            <strong>8</strong>
+            <strong>{skills.length}</strong>
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon">💻</div>
+
           <div>
             <span>Projects</span>
-            <strong>4</strong>
+            <strong>{projects.length}</strong>
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon">🏆</div>
+
           <div>
             <span>Achievements</span>
-            <strong>6</strong>
+            <strong>{achievements.length}</strong>
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-icon">📈</div>
+
           <div>
             <span>Overall Progress</span>
-            <strong>72%</strong>
+            <strong>{overallProgress}%</strong>
           </div>
         </div>
-
       </div>
 
       {/* Dashboard Content */}
@@ -64,63 +158,33 @@ function Dashboard() {
           </div>
 
           <div className="skill-progress">
-
-            <div className="progress-item">
-              <div className="progress-info">
-                <span>Java</span>
-                <strong>80%</strong>
-              </div>
-
-              <div className="progress-bar">
+            {skills.length === 0 ? (
+              <p>No skills added yet.</p>
+            ) : (
+              skills.slice(0, 5).map((skill) => (
                 <div
-                  className="progress-fill"
-                  style={{ width: "80%" }}
-                ></div>
-              </div>
-            </div>
+                  className="progress-item"
+                  key={skill._id}
+                >
+                  <div className="progress-info">
+                    <span>{skill.name}</span>
 
-            <div className="progress-item">
-              <div className="progress-info">
-                <span>JavaScript</span>
-                <strong>70%</strong>
-              </div>
+                    <strong>
+                      {skill.progress}%
+                    </strong>
+                  </div>
 
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: "70%" }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="progress-item">
-              <div className="progress-info">
-                <span>React</span>
-                <strong>65%</strong>
-              </div>
-
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: "65%" }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="progress-item">
-              <div className="progress-info">
-                <span>SQL</span>
-                <strong>75%</strong>
-              </div>
-
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: "75%" }}
-                ></div>
-              </div>
-            </div>
-
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{
+                        width: `${skill.progress}%`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -134,36 +198,34 @@ function Dashboard() {
           </div>
 
           <div className="project-list">
+            {projects.length === 0 ? (
+              <p>No projects added yet.</p>
+            ) : (
+              projects.slice(0, 5).map((project) => (
+                <div
+                  className="project-item"
+                  key={project._id}
+                >
+                  <div className="project-icon">
+                    💻
+                  </div>
 
-            <div className="project-item">
-              <div className="project-icon">🌐</div>
-              <div>
-                <strong>SkillSphere</strong>
-                <span>React • Node.js • MongoDB</span>
-              </div>
-            </div>
+                  <div>
+                    <strong>{project.title}</strong>
 
-            <div className="project-item">
-              <div className="project-icon">☕</div>
-              <div>
-                <strong>Java Management System</strong>
-                <span>Java • MySQL</span>
-              </div>
-            </div>
-
-            <div className="project-item">
-              <div className="project-icon">📱</div>
-              <div>
-                <strong>Student Portal</strong>
-                <span>HTML • CSS • JavaScript</span>
-              </div>
-            </div>
-
+                    <span>
+                      {project.technologies?.length > 0
+                        ? project.technologies.join(" • ")
+                        : "No technologies added"}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
       </div>
-
     </div>
   );
 }

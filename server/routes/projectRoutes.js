@@ -117,11 +117,12 @@ router.delete("/:id", protect, async (req, res) => {
     res.json({
       message: "Project deleted successfully",
     });
-  } catch (error) {
-    res.status(500).json({
-      message: "Project deleted successfully",
-    });
-  }
+ } catch (error) {
+  res.status(500).json({
+    message: "Failed to delete project",
+    error: error.message,
+  });
+}
 });
 
 module.exports = router;

@@ -942,6 +942,15 @@
   color: #fca5a5;
   font-size: 14px;
 }
+.auth-success {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid #166534;
+  border-radius: 10px;
+  background: #052e16;
+  color: #86efac;
+  font-size: 14px;
+}
 
 .auth-footer {
   margin: 22px 0 0;
@@ -975,4 +984,121 @@
   .auth-heading h2 {
     font-size: 24px;
   }
+}
+/* =========================
+   SKILL FORM
+========================= */
+
+.skill-form-card {
+  margin-bottom: 24px;
+}
+
+.skill-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.skill-form .form-group {
+  margin-bottom: 0;
+}
+
+.skill-form .form-group input,
+.skill-form .form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #2d3748;
+  border-radius: 10px;
+  background: #0b1220;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.skill-form .form-group input:focus,
+.skill-form .form-group select:focus {
+  border-color: #6366f1;
+}
+
+.skill-form .form-group select {
+  cursor: pointer;
+}
+
+.skill-form .form-group input[type="range"] {
+  padding: 0;
+  cursor: pointer;
+  accent-color: #6366f1;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .skill-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    grid-column: auto;
+  }
+}
+.skill-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.delete-btn {
+  border: 1px solid #7f1d1d;
+  background: #2a1115;
+  color: #fca5a5;
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.delete-btn:hover {
+  background: #451a1a;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .skill-actions {
+    flex-direction: column;
+  }
+
+  .skill-actions button {
+    width: 100%;
+  }
+}
+.project-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+.skill-form .form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #2d3748;
+  border-radius: 10px;
+  background: #0b1220;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.skill-form .form-group textarea:focus {
+  border-color: #6366f1;
 }
