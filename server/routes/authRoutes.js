@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -101,6 +102,79 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Login failed",
+      error: error.message,
+    });
+  }
+});
+router.get("/goal", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select(
+      "careerGoal"
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    res.json({
+      careerGoal: user.careerGoal,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch career goal",
+      error: error.message,
+    });
+  }
+});
+
+router.put("/goal", protect, async (req, res) => {
+  try {
+    const { careerGoal } = req.body;
+
+    const validGoals = [
+      "Java Full Stack Developer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Python Developer",
+      "Data Analyst",
+      "AI / Machine Learning Developer",
+      "Generative AI Developer",
+      "Mobile App Developer",
+      "Cloud / DevOps Engineer",
+      "Cybersecurity Engineer",
+      "Not Decided Yet",
+    ];
+
+    if (!validGoals.includes(careerGoal)) {
+      return res.status(400).json({
+        message: "Invalid career goal",
+      });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { careerGoal },
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).select("careerGoal");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    res.json({
+      message: "Career goal updated successfully",
+      careerGoal: user.careerGoal,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to update career goal",
       error: error.message,
     });
   }
