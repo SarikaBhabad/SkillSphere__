@@ -9,37 +9,46 @@ const roadmapData = {
         title: "Java Fundamentals",
         description:
           "Learn Java syntax, OOP, collections, exception handling and core programming concepts.",
-        progress: 70,
+        keywords: ["java", "core java", "oops", "oop"],
       },
       {
         title: "SQL & Database",
         description:
           "Learn SQL, database design, joins, queries and relational database concepts.",
-        progress: 60,
+        keywords: ["sql", "mysql", "mongodb", "database", "dbms"],
       },
       {
         title: "Backend Development",
         description:
           "Learn Spring Boot, REST APIs, authentication and backend architecture.",
-        progress: 40,
+        keywords: [
+          "spring",
+          "spring boot",
+          "backend",
+          "rest",
+          "api",
+          "node",
+          "express",
+        ],
       },
       {
         title: "Frontend Development",
         description:
           "Build responsive interfaces using HTML, CSS, JavaScript and React.",
-        progress: 50,
+        keywords: ["html", "css", "javascript", "js", "react", "frontend"],
       },
       {
         title: "Full Stack Projects",
         description:
           "Build real-world applications connecting frontend, backend and databases.",
-        progress: 30,
+        keywords: ["full stack", "fullstack"],
+        usesProjects: true,
       },
       {
         title: "DSA & Interview Preparation",
         description:
           "Practice data structures, algorithms, aptitude and technical interviews.",
-        progress: 20,
+        keywords: ["dsa", "data structures", "algorithms", "aptitude"],
       },
     ],
   },
@@ -52,37 +61,38 @@ const roadmapData = {
         title: "HTML & CSS",
         description:
           "Learn semantic HTML, layouts, responsive design and modern CSS.",
-        progress: 70,
+        keywords: ["html", "css"],
       },
       {
         title: "JavaScript",
         description:
           "Learn DOM, events, asynchronous JavaScript, APIs and modern ES6+ features.",
-        progress: 60,
+        keywords: ["javascript", "js", "typescript"],
       },
       {
         title: "React",
         description:
           "Learn components, props, state, hooks, routing and API integration.",
-        progress: 50,
+        keywords: ["react", "reactjs"],
       },
       {
         title: "UI/UX & Responsive Design",
         description:
           "Create accessible, responsive and visually polished interfaces.",
-        progress: 40,
+        keywords: ["ui", "ux", "responsive design", "tailwind", "css"],
       },
       {
         title: "Frontend Projects",
         description:
           "Build portfolio-quality web applications using modern frontend tools.",
-        progress: 30,
+        keywords: ["frontend", "react", "web"],
+        usesProjects: true,
       },
       {
         title: "Frontend Interview Preparation",
         description:
           "Prepare JavaScript, React, browser and frontend interview concepts.",
-        progress: 20,
+        keywords: ["javascript", "react", "frontend", "dsa"],
       },
     ],
   },
@@ -95,37 +105,38 @@ const roadmapData = {
         title: "Programming Fundamentals",
         description:
           "Strengthen programming, OOP, data structures and problem solving.",
-        progress: 70,
+        keywords: ["java", "python", "javascript", "programming", "oop"],
       },
       {
         title: "Database Development",
         description:
           "Learn SQL, database design, queries, indexing and transactions.",
-        progress: 60,
+        keywords: ["sql", "mysql", "mongodb", "database", "dbms"],
       },
       {
         title: "REST API Development",
         description:
           "Build secure REST APIs with authentication, validation and error handling.",
-        progress: 50,
+        keywords: ["rest", "api", "express", "node", "spring"],
       },
       {
         title: "Backend Framework",
         description:
           "Learn Spring Boot or another production backend framework.",
-        progress: 40,
+        keywords: ["spring", "spring boot", "node", "express", "django"],
       },
       {
         title: "Backend Projects",
         description:
           "Build real-world API-driven applications and backend services.",
-        progress: 30,
+        keywords: ["backend", "api"],
+        usesProjects: true,
       },
       {
         title: "Deployment & Interview Preparation",
         description:
           "Learn deployment basics and prepare for backend technical interviews.",
-        progress: 20,
+        keywords: ["docker", "aws", "cloud", "devops", "dsa"],
       },
     ],
   },
@@ -138,37 +149,38 @@ const roadmapData = {
         title: "Python Fundamentals",
         description:
           "Learn Python syntax, data structures, functions and modules.",
-        progress: 70,
+        keywords: ["python"],
       },
       {
         title: "Object-Oriented Python",
         description:
           "Learn classes, inheritance, exceptions and reusable Python code.",
-        progress: 60,
+        keywords: ["python", "oop"],
       },
       {
         title: "Web Development",
         description:
           "Learn Django or Flask and build backend applications.",
-        progress: 40,
+        keywords: ["django", "flask", "python", "backend"],
       },
       {
         title: "APIs & Databases",
         description:
           "Build REST APIs and connect Python applications with databases.",
-        progress: 35,
+        keywords: ["api", "rest", "sql", "database", "python"],
       },
       {
         title: "Python Projects",
         description:
           "Build practical Python applications for your portfolio.",
-        progress: 30,
+        keywords: ["python"],
+        usesProjects: true,
       },
       {
         title: "Interview Preparation",
         description:
           "Practice Python, problem solving and technical interview questions.",
-        progress: 20,
+        keywords: ["python", "dsa", "algorithms"],
       },
     ],
   },
@@ -181,37 +193,38 @@ const roadmapData = {
         title: "Excel & Data Basics",
         description:
           "Learn formulas, functions, pivot tables and data cleaning.",
-        progress: 70,
+        keywords: ["excel", "data"],
       },
       {
         title: "SQL",
         description:
           "Learn queries, joins, aggregation, subqueries and database analysis.",
-        progress: 60,
+        keywords: ["sql", "mysql", "database"],
       },
       {
         title: "Python for Data Analysis",
         description:
           "Learn Python, NumPy and Pandas for data manipulation.",
-        progress: 40,
+        keywords: ["python", "pandas", "numpy"],
       },
       {
         title: "Data Visualization",
         description:
           "Create meaningful charts, dashboards and reports.",
-        progress: 30,
+        keywords: ["power bi", "tableau", "visualization", "data"],
       },
       {
         title: "Power BI",
         description:
           "Build interactive business intelligence dashboards.",
-        progress: 25,
+        keywords: ["power bi", "bi"],
       },
       {
         title: "Data Analyst Portfolio",
         description:
           "Create real-world analysis projects and prepare for interviews.",
-        progress: 20,
+        keywords: ["data analyst", "sql", "python"],
+        usesProjects: true,
       },
     ],
   },
@@ -224,37 +237,38 @@ const roadmapData = {
         title: "Python Programming",
         description:
           "Build strong Python programming and problem-solving skills.",
-        progress: 70,
+        keywords: ["python"],
       },
       {
         title: "Mathematics for ML",
         description:
           "Learn statistics, probability, linear algebra and basic calculus.",
-        progress: 40,
+        keywords: ["statistics", "mathematics", "math", "linear algebra"],
       },
       {
         title: "Machine Learning",
         description:
           "Learn supervised, unsupervised and model evaluation techniques.",
-        progress: 30,
+        keywords: ["machine learning", "ml", "scikit", "sklearn"],
       },
       {
         title: "Deep Learning",
         description:
           "Learn neural networks and modern deep learning concepts.",
-        progress: 20,
+        keywords: ["deep learning", "tensorflow", "pytorch", "neural"],
       },
       {
         title: "AI Projects",
         description:
           "Build practical machine learning and AI applications.",
-        progress: 15,
+        keywords: ["ai", "machine learning", "ml"],
+        usesProjects: true,
       },
       {
         title: "AI Interview Preparation",
         description:
           "Prepare machine learning concepts, projects and technical interviews.",
-        progress: 10,
+        keywords: ["ai", "machine learning", "dsa"],
       },
     ],
   },
@@ -267,37 +281,38 @@ const roadmapData = {
         title: "Python & AI Fundamentals",
         description:
           "Build Python and artificial intelligence foundations.",
-        progress: 70,
+        keywords: ["python", "ai"],
       },
       {
         title: "LLMs & Prompt Engineering",
         description:
           "Understand large language models, prompts and model interaction.",
-        progress: 50,
+        keywords: ["llm", "prompt engineering", "generative ai", "genai"],
       },
       {
         title: "Embeddings & Vector Databases",
         description:
           "Learn embeddings, semantic search and vector databases.",
-        progress: 30,
+        keywords: ["embeddings", "vector database", "pinecone", "chroma"],
       },
       {
         title: "RAG Applications",
         description:
           "Build retrieval-augmented generation applications.",
-        progress: 20,
+        keywords: ["rag", "retrieval", "generative ai"],
       },
       {
         title: "AI Agents",
         description:
           "Learn agent workflows, tools, memory and multi-step AI systems.",
-        progress: 15,
+        keywords: ["agents", "ai agents", "agentic ai", "n8n"],
       },
       {
         title: "Generative AI Projects",
         description:
           "Build portfolio-quality AI applications.",
-        progress: 10,
+        keywords: ["generative ai", "genai", "llm", "ai"],
+        usesProjects: true,
       },
     ],
   },
@@ -310,37 +325,38 @@ const roadmapData = {
         title: "Programming Fundamentals",
         description:
           "Strengthen programming and object-oriented programming concepts.",
-        progress: 70,
+        keywords: ["java", "kotlin", "dart", "python", "programming"],
       },
       {
         title: "Mobile Development Basics",
         description:
           "Learn Android, Flutter or another mobile development framework.",
-        progress: 50,
+        keywords: ["android", "flutter", "react native", "kotlin"],
       },
       {
         title: "UI Development",
         description:
           "Build responsive mobile interfaces and navigation.",
-        progress: 40,
+        keywords: ["flutter", "android", "react native", "ui"],
       },
       {
         title: "APIs & Databases",
         description:
           "Connect mobile applications with backend APIs and databases.",
-        progress: 30,
+        keywords: ["api", "rest", "firebase", "database"],
       },
       {
         title: "Mobile Projects",
         description:
           "Build and test real-world mobile applications.",
-        progress: 20,
+        keywords: ["android", "flutter", "mobile"],
+        usesProjects: true,
       },
       {
         title: "Publishing & Interview Preparation",
         description:
           "Learn deployment and prepare for mobile developer roles.",
-        progress: 10,
+        keywords: ["android", "flutter", "mobile", "dsa"],
       },
     ],
   },
@@ -353,37 +369,38 @@ const roadmapData = {
         title: "Linux & Networking",
         description:
           "Learn Linux commands, processes, networking and system basics.",
-        progress: 60,
+        keywords: ["linux", "networking", "network"],
       },
       {
         title: "Git & Version Control",
         description:
           "Learn Git workflows, branching and collaboration.",
-        progress: 70,
+        keywords: ["git", "github", "version control"],
       },
       {
         title: "Docker",
         description:
           "Learn containers, images, Dockerfiles and container workflows.",
-        progress: 40,
+        keywords: ["docker", "containers"],
       },
       {
         title: "CI/CD",
         description:
           "Build automated testing and deployment pipelines.",
-        progress: 30,
+        keywords: ["ci/cd", "jenkins", "github actions", "cicd"],
       },
       {
         title: "Cloud Platforms",
         description:
           "Learn AWS, Azure or another major cloud platform.",
-        progress: 20,
+        keywords: ["aws", "azure", "cloud"],
       },
       {
         title: "DevOps Projects",
         description:
           "Deploy and monitor real applications using cloud and DevOps tools.",
-        progress: 10,
+        keywords: ["devops", "cloud", "docker"],
+        usesProjects: true,
       },
     ],
   },
@@ -396,37 +413,38 @@ const roadmapData = {
         title: "Networking Fundamentals",
         description:
           "Learn TCP/IP, HTTP, DNS, ports and network architecture.",
-        progress: 60,
+        keywords: ["networking", "network", "tcp", "http", "dns"],
       },
       {
         title: "Linux & Operating Systems",
         description:
           "Learn Linux administration, processes, permissions and system security.",
-        progress: 50,
+        keywords: ["linux", "operating systems", "os"],
       },
       {
         title: "Security Fundamentals",
         description:
           "Learn authentication, encryption, vulnerabilities and security principles.",
-        progress: 40,
+        keywords: ["security", "cybersecurity", "encryption"],
       },
       {
         title: "Web Security",
         description:
           "Understand common web vulnerabilities and secure development practices.",
-        progress: 30,
+        keywords: ["web security", "owasp", "security"],
       },
       {
         title: "Security Tools & Labs",
         description:
           "Practice security concepts using legal learning environments and labs.",
-        progress: 20,
+        keywords: ["kali", "burp", "security", "cybersecurity"],
       },
       {
         title: "Cybersecurity Projects",
         description:
           "Build security-focused projects and prepare for entry-level roles.",
-        progress: 10,
+        keywords: ["cybersecurity", "security"],
+        usesProjects: true,
       },
     ],
   },
@@ -439,74 +457,162 @@ const roadmapData = {
         title: "Explore Programming",
         description:
           "Try different programming languages and understand the basics.",
-        progress: 0,
+        keywords: ["java", "python", "javascript", "programming"],
       },
       {
         title: "Explore Web Development",
         description:
           "Learn basic HTML, CSS and JavaScript.",
-        progress: 0,
+        keywords: ["html", "css", "javascript"],
       },
       {
         title: "Explore Data & AI",
         description:
           "Understand data analysis, Python and artificial intelligence.",
-        progress: 0,
+        keywords: ["python", "data", "ai"],
       },
       {
         title: "Explore Backend & Cloud",
         description:
           "Learn what APIs, databases, servers and cloud platforms do.",
-        progress: 0,
+        keywords: ["backend", "api", "database", "cloud"],
       },
       {
         title: "Build a Small Project",
         description:
           "Try a small project in an area you enjoy.",
-        progress: 0,
+        keywords: ["project"],
+        usesProjects: true,
       },
       {
         title: "Choose Your Career Goal",
         description:
           "Select a career direction and start your personalized roadmap.",
-        progress: 0,
+        keywords: [],
       },
     ],
   },
 };
+
+function calculateStepProgress(step, skills, projects) {
+  if (step.title === "Choose Your Career Goal") {
+    return 0;
+  }
+
+  if (step.usesProjects) {
+  return Math.min(projects.length * 25, 100);  }
+
+  if (!step.keywords || step.keywords.length === 0) {
+    return 0;
+  }
+
+  const matchingSkills = skills.filter((skill) => {
+    const skillName = (skill.name || "").toLowerCase();
+
+    return step.keywords.some((keyword) =>
+      skillName.includes(keyword.toLowerCase())
+    );
+  });
+
+  if (matchingSkills.length === 0) {
+    return 0;
+  }
+
+  const averageProgress =
+    matchingSkills.reduce(
+      (total, skill) => total + Number(skill.progress || 0),
+      0
+    ) / matchingSkills.length;
+
+  return Math.round(Math.min(100, averageProgress));
+}
 
 function Roadmap() {
   const [careerGoal, setCareerGoal] = useState(
     "Not Decided Yet"
   );
 
+  const [skills, setSkills] = useState([]);
+  const [projects, setProjects] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchCareerGoal = async () => {
+    const fetchRoadmapData = async () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(
-          "http://localhost:5000/api/auth/goal",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
 
-        const data = await response.json();
+        const [
+          goalResponse,
+          skillsResponse,
+          projectsResponse,
+        ] = await Promise.all([
+          fetch(
+            "http://localhost:5000/api/auth/goal",
+            {
+              headers,
+            }
+          ),
 
-        if (!response.ok) {
+          fetch(
+            "http://localhost:5000/api/skills",
+            {
+              headers,
+            }
+          ),
+
+          fetch(
+            "http://localhost:5000/api/projects",
+            {
+              headers,
+            }
+          ),
+        ]);
+
+        const goalData = await goalResponse.json();
+        const skillsData = await skillsResponse.json();
+        const projectsData = await projectsResponse.json();
+
+        if (!goalResponse.ok) {
           throw new Error(
-            data.message || "Failed to fetch career goal"
+            goalData.message ||
+              "Failed to fetch career goal"
+          );
+        }
+
+        if (!skillsResponse.ok) {
+          throw new Error(
+            skillsData.message ||
+              "Failed to fetch skills"
+          );
+        }
+
+        if (!projectsResponse.ok) {
+          throw new Error(
+            projectsData.message ||
+              "Failed to fetch projects"
           );
         }
 
         setCareerGoal(
-          data.careerGoal || "Not Decided Yet"
+          goalData.careerGoal || "Not Decided Yet"
+        );
+
+        setSkills(
+          Array.isArray(skillsData)
+            ? skillsData
+            : []
+        );
+
+        setProjects(
+          Array.isArray(projectsData)
+            ? projectsData
+            : []
         );
       } catch (error) {
         setError(error.message);
@@ -515,7 +621,7 @@ function Roadmap() {
       }
     };
 
-    fetchCareerGoal();
+    fetchRoadmapData();
   }, []);
 
   if (loading) {
@@ -525,6 +631,17 @@ function Roadmap() {
   const roadmap =
     roadmapData[careerGoal] ||
     roadmapData["Not Decided Yet"];
+
+  const calculatedSteps = roadmap.steps.map(
+    (step) => ({
+      ...step,
+      progress: calculateStepProgress(
+        step,
+        skills,
+        projects
+      ),
+    })
+  );
 
   return (
     <div className="roadmap">
@@ -568,7 +685,7 @@ function Roadmap() {
 
       <div className="roadmap-list">
 
-        {roadmap.steps.map((step, index) => {
+        {calculatedSteps.map((step, index) => {
 
           const status =
             step.progress >= 70

@@ -1792,3 +1792,267 @@
     text-align: center;
   }
 }}
+/* =====================================================
+   ADMIN STUDENT CARDS
+   ===================================================== */
+
+.admin-students-section {
+  overflow: hidden;
+}
+
+.admin-students-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.admin-student-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 20px;
+
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(30, 41, 59, 0.72),
+      rgba(15, 23, 42, 0.92)
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.admin-student-item:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(129, 140, 248, 0.35);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(99, 102, 241, 0.06);
+}
+
+/* Student identity */
+
+.admin-student-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 220px;
+  flex: 1;
+}
+
+.admin-student-avatar {
+  width: 52px;
+  height: 52px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  color: #ffffff;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.admin-student-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
+}
+
+.admin-student-info strong {
+  color: #f8fafc;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-student-info span {
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-student-info small {
+  width: fit-content;
+
+  margin-top: 2px;
+
+  padding: 3px 8px;
+
+  border-radius: 999px;
+
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(129, 140, 248, 0.18);
+
+  color: #a5b4fc;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Statistics container */
+
+.admin-student-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(105px, 1fr));
+
+  gap: 10px;
+
+  flex: 1;
+  max-width: 500px;
+}
+
+/* Individual statistic */
+
+.admin-student-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 0;
+
+  padding: 11px 13px;
+
+  border-radius: 13px;
+
+  background: rgba(15, 23, 42, 0.72);
+
+  border: 1px solid rgba(148, 163, 184, 0.1);
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-student-stat:hover {
+  background: rgba(30, 41, 59, 0.9);
+
+  border-color: rgba(129, 140, 248, 0.2);
+}
+
+.admin-student-stat-icon {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(99, 102, 241, 0.1);
+
+  font-size: 15px;
+}
+
+.admin-student-stat > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  min-width: 0;
+}
+
+.admin-student-stat strong {
+  color: #f8fafc;
+
+  font-size: 17px;
+  line-height: 1.1;
+}
+
+.admin-student-stat span {
+  color: #64748b;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .admin-student-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-student-identity {
+    width: 100%;
+  }
+
+  .admin-student-stats {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-student-item {
+    padding: 16px;
+    gap: 18px;
+  }
+
+  .admin-student-avatar {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 13px;
+
+    font-size: 18px;
+  }
+
+  .admin-student-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-student-stat {
+    padding: 12px;
+  }
+}

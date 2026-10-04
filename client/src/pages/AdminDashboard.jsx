@@ -64,16 +64,19 @@ function AdminDashboard() {
 
   return (
     <div className="dashboard">
+
       {/* Page Heading */}
       <div className="page-heading">
         <div>
           <h2>Admin Dashboard</h2>
+
           <p>
             Manage students and view SkillSphere statistics.
           </p>
         </div>
       </div>
 
+      {/* Error */}
       {error && (
         <p className="auth-error">
           {error}
@@ -82,6 +85,7 @@ function AdminDashboard() {
 
       {/* Statistics */}
       <div className="stats-grid">
+
         <div className="stat-card">
           <div className="stat-icon">👨‍🎓</div>
 
@@ -117,13 +121,16 @@ function AdminDashboard() {
             <strong>{totalAchievements}</strong>
           </div>
         </div>
+
       </div>
 
       {/* Students */}
-      <div className="dashboard-card">
+      <div className="dashboard-card admin-students-section">
+
         <div className="card-header">
           <div>
             <h3>Students</h3>
+
             <p>
               Registered students and their portfolio activity.
             </p>
@@ -133,46 +140,114 @@ function AdminDashboard() {
         {students.length === 0 ? (
           <p>No students registered yet.</p>
         ) : (
+
           <div className="admin-students-list">
+
             {students.map((student) => (
+
               <div
                 className="admin-student-item"
                 key={student._id}
               >
-                <div className="admin-student-avatar">
-                  {student.name
-                    ? student.name
-                        .charAt(0)
-                        .toUpperCase()
-                    : "S"}
+
+                {/* Student Identity */}
+                <div className="admin-student-identity">
+
+                  <div className="admin-student-avatar">
+                    {student.name
+                      ? student.name
+                          .charAt(0)
+                          .toUpperCase()
+                      : "S"}
+                  </div>
+
+                  <div className="admin-student-info">
+
+                    <strong>
+                      {student.name}
+                    </strong>
+
+                    <span>
+                      {student.email}
+                    </span>
+
+                    <small>
+                      Student
+                    </small>
+
+                  </div>
+
                 </div>
 
-                <div className="admin-student-info">
-                  <strong>{student.name}</strong>
-
-                  <span>{student.email}</span>
-                </div>
-
+                {/* Student Statistics */}
                 <div className="admin-student-stats">
-                  <span>
-                    🎯 {student.skillCount || 0} Skills
-                  </span>
 
-                  <span>
-                    💻 {student.projectCount || 0} Projects
-                  </span>
+                  <div className="admin-student-stat">
 
-                  <span>
-                    🏆{" "}
-                    {student.achievementCount || 0}{" "}
-                    Achievements
-                  </span>
+                    <div className="admin-student-stat-icon">
+                      🎯
+                    </div>
+
+                    <div>
+                      <strong>
+                        {student.skillCount || 0}
+                      </strong>
+
+                      <span>
+                        Skills
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <div className="admin-student-stat">
+
+                    <div className="admin-student-stat-icon">
+                      💻
+                    </div>
+
+                    <div>
+                      <strong>
+                        {student.projectCount || 0}
+                      </strong>
+
+                      <span>
+                        Projects
+                      </span>
+                    </div>
+
+                  </div>
+
+                  <div className="admin-student-stat">
+
+                    <div className="admin-student-stat-icon">
+                      🏆
+                    </div>
+
+                    <div>
+                      <strong>
+                        {student.achievementCount || 0}
+                      </strong>
+
+                      <span>
+                        Achievements
+                      </span>
+                    </div>
+
+                  </div>
+
                 </div>
+
               </div>
+
             ))}
+
           </div>
+
         )}
+
       </div>
+
     </div>
   );
 }
