@@ -20,7 +20,7 @@ function Achievements() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/achievements",
+        `${import.meta.env.VITE_API_URL}/api/achievements`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -80,7 +80,7 @@ function Achievements() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/achievements",
+        `${import.meta.env.VITE_API_URL}/api/achievements`,
         {
           method: "POST",
           headers: {
@@ -145,7 +145,7 @@ function Achievements() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/achievements/${editingAchievementId}`,
+        `${import.meta.env.VITE_API_URL}/api/achievements/${editingAchievementId}`,
         {
           method: "PUT",
           headers: {
@@ -182,47 +182,48 @@ function Achievements() {
       setError(error.message);
     }
   };
+
   const handleDeleteAchievement = async (achievementId) => {
-  try {
-    setError("");
+    try {
+      setError("");
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this achievement?"
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    const token = localStorage.getItem("token");
-
-    const response = await fetch(
-      `http://localhost:5000/api/achievements/${achievementId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.message || "Failed to delete achievement"
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this achievement?"
       );
-    }
 
-    setAchievements((currentAchievements) =>
-      currentAchievements.filter(
-        (achievement) => achievement._id !== achievementId
-      )
-    );
-  } catch (error) {
-    setError(error.message);
-  }
-};
+      if (!confirmed) {
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/achievements/${achievementId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to delete achievement"
+        );
+      }
+
+      setAchievements((currentAchievements) =>
+        currentAchievements.filter(
+          (achievement) => achievement._id !== achievementId
+        )
+      );
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const handleSubmit = () => {
     if (editingAchievementId) {
@@ -390,27 +391,29 @@ function Achievements() {
                     "No description provided."}
                 </p>
 
-               <div className="project-actions">
-  <button
-    type="button"
-    className="secondary-btn"
-    onClick={() =>
-      handleEditClick(achievement)
-    }
-  >
-    Edit
-  </button>
+                <div className="project-actions">
+                  <button
+                    type="button"
+                    className="secondary-btn"
+                    onClick={() =>
+                      handleEditClick(achievement)
+                    }
+                  >
+                    Edit
+                  </button>
 
-  <button
-    type="button"
-    className="delete-btn"
-    onClick={() =>
-      handleDeleteAchievement(achievement._id)
-    }
-  >
-    Delete
-  </button>
-</div>
+                  <button
+                    type="button"
+                    className="delete-btn"
+                    onClick={() =>
+                      handleDeleteAchievement(
+                        achievement._id
+                      )
+                    }
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           ))}

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,15 +22,15 @@ function Dashboard() {
 
       const [skillsResponse, projectsResponse, achievementsResponse] =
         await Promise.all([
-          fetch("http://localhost:5000/api/skills", {
+          fetch(`${import.meta.env.VITE_API_URL}/api/skills`, {
             headers,
           }),
 
-          fetch("http://localhost:5000/api/projects", {
+          fetch(`${import.meta.env.VITE_API_URL}/api/projects`, {
             headers,
           }),
 
-          fetch("http://localhost:5000/api/achievements", {
+          fetch(`${import.meta.env.VITE_API_URL}/api/achievements`, {
             headers,
           }),
         ]);
@@ -97,11 +96,11 @@ function Dashboard() {
         </div>
 
         <button
-  className="primary-btn"
-  onClick={() => navigate("/skills")}
->
-  + Add Skill
-</button>
+          className="primary-btn"
+          onClick={() => navigate("/skills")}
+        >
+          + Add Skill
+        </button>
       </div>
 
       {error && <p className="auth-error">{error}</p>}

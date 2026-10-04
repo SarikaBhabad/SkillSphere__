@@ -43,7 +43,7 @@ function Profile() {
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-          "http://localhost:5000/api/auth/goal",
+        `${import.meta.env.VITE_API_URL}/api/auth/goal`  ,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ function Profile() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/goal",
+       `${import.meta.env.VITE_API_URL}/api/auth/goal` ,
         {
           method: "PUT",
           headers: {

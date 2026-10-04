@@ -19,11 +19,14 @@ function Skills() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/api/skills", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/skills`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await response.json();
 
@@ -74,19 +77,22 @@ function Skills() {
 
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/api/skills", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          category: formData.category,
-          level: formData.level,
-          progress: Number(formData.progress),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/skills`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            category: formData.category,
+            level: formData.level,
+            progress: Number(formData.progress),
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -131,7 +137,7 @@ function Skills() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/skills/${editingSkillId}`,
+        `${import.meta.env.VITE_API_URL}/api/skills/${editingSkillId}`,
         {
           method: "PUT",
           headers: {
@@ -164,43 +170,44 @@ function Skills() {
       setError(error.message);
     }
   };
+
   const handleDeleteSkill = async (skillId) => {
-  try {
-    setError("");
+    try {
+      setError("");
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this skill?"
-    );
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this skill?"
+      );
 
-    if (!confirmed) {
-      return;
-    }
-
-    const token = localStorage.getItem("token");
-
-    const response = await fetch(
-      `http://localhost:5000/api/skills/${skillId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      if (!confirmed) {
+        return;
       }
-    );
 
-    const data = await response.json();
+      const token = localStorage.getItem("token");
 
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to delete skill");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/skills/${skillId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to delete skill");
+      }
+
+      setSkills((currentSkills) =>
+        currentSkills.filter((skill) => skill._id !== skillId)
+      );
+    } catch (error) {
+      setError(error.message);
     }
-
-    setSkills((currentSkills) =>
-      currentSkills.filter((skill) => skill._id !== skillId)
-    );
-  } catch (error) {
-    setError(error.message);
-  }
-};
+  };
 
   const handleSubmit = () => {
     if (editingSkillId) {
@@ -362,22 +369,22 @@ function Skills() {
               </div>
 
               <div className="skill-actions">
-  <button
-    type="button"
-    className="secondary-btn"
-    onClick={() => handleEditClick(skill)}
-  >
-    Edit
-  </button>
+                <button
+                  type="button"
+                  className="secondary-btn"
+                  onClick={() => handleEditClick(skill)}
+                >
+                  Edit
+                </button>
 
-  <button
-    type="button"
-    className="delete-btn"
-    onClick={() => handleDeleteSkill(skill._id)}
-  >
-    Delete
-  </button>
-</div>
+                <button
+                  type="button"
+                  className="delete-btn"
+                  onClick={() => handleDeleteSkill(skill._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -387,4 +394,3 @@ function Skills() {
 }
 
 export default Skills;
-      

@@ -21,7 +21,7 @@ function Projects() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/projects",
+        `${import.meta.env.VITE_API_URL}/api/projects`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ function Projects() {
         .filter((tech) => tech !== "");
 
       const response = await fetch(
-        "http://localhost:5000/api/projects",
+        `${import.meta.env.VITE_API_URL}/api/projects`,
         {
           method: "POST",
           headers: {
@@ -157,7 +157,7 @@ function Projects() {
         .filter((tech) => tech !== "");
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/${editingProjectId}`,
+        `${import.meta.env.VITE_API_URL}/api/projects/${editingProjectId}`,
         {
           method: "PUT",
           headers: {
@@ -195,47 +195,48 @@ function Projects() {
       setError(error.message);
     }
   };
+
   const handleDeleteProject = async (projectId) => {
-  try {
-    setError("");
+    try {
+      setError("");
 
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this project?"
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    const token = localStorage.getItem("token");
-
-    const response = await fetch(
-      `http://localhost:5000/api/projects/${projectId}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.message || "Failed to delete project"
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this project?"
       );
-    }
 
-    setProjects((currentProjects) =>
-      currentProjects.filter(
-        (project) => project._id !== projectId
-      )
-    );
-  } catch (error) {
-    setError(error.message);
-  }
-};
+      if (!confirmed) {
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to delete project"
+        );
+      }
+
+      setProjects((currentProjects) =>
+        currentProjects.filter(
+          (project) => project._id !== projectId
+        )
+      );
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const handleSubmit = () => {
     if (editingProjectId) {
@@ -413,33 +414,35 @@ function Projects() {
               </div>
 
               <div className="project-actions">
-  {project.githubLink && (
-    <a
-      href={project.githubLink}
-      target="_blank"
-      rel="noreferrer"
-      className="secondary-btn"
-    >
-      GitHub
-    </a>
-  )}
+                {project.githubLink && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="secondary-btn"
+                  >
+                    GitHub
+                  </a>
+                )}
 
-  <button
-    type="button"
-    className="secondary-btn"
-    onClick={() => handleEditClick(project)}
-  >
-    Edit
-  </button>
+                <button
+                  type="button"
+                  className="secondary-btn"
+                  onClick={() => handleEditClick(project)}
+                >
+                  Edit
+                </button>
 
-  <button
-    type="button"
-    className="delete-btn"
-    onClick={() => handleDeleteProject(project._id)}
-  >
-    Delete
-  </button>
-</div>
+                <button
+                  type="button"
+                  className="delete-btn"
+                  onClick={() =>
+                    handleDeleteProject(project._id)
+                  }
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
